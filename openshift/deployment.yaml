@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: httpserver-go
+  name: httpserver-go
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: httpserver-go
+  template:
+    metadata:
+      labels:
+        app: httpserver-go
+    spec:
+      containers:
+        - image: quay.io/openshift-pipeline/httpserver-go:latest
+          imagePullPolicy: Always
+          name: httpserver-go
+          ports:
+            - containerPort: 8888
+              protocol: TCP
